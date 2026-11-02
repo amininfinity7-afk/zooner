@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fa" dir="rtl" data-theme="dark" data-bubble="frost">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ZONER</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="auth" class="center">
+  <form class="card auth-card" id="authForm" autocomplete="off" novalidate>
+    <button type="button" class="link langBtn" id="langA"></button>
+    <h1 class="logo">ZONER</h1>
+    <p class="muted" data-i="tag"></p>
+    <nav class="tabs" id="aTabs"><button type="button" class="on" data-m="login" data-i="login"></button><button type="button" data-m="reg" data-i="register"></button></nav>
+    <div class="step" id="stLogin">
+      <input id="aId" data-ph="loginId" dir="ltr" autocapitalize="off" spellcheck="false">
+      <input id="aPw" type="password" data-ph="pw" maxlength="60" dir="ltr">
+    </div>
+    <div class="step" id="stPhone" hidden>
+      <input id="rPhone" type="tel" data-ph="phone" maxlength="16" dir="ltr" inputmode="tel">
+      <div class="step" id="codeBox" hidden>
+        <p class="demo" id="demoCode"></p>
+        <input id="rCode" data-ph="code" maxlength="5" dir="ltr" inputmode="numeric">
+      </div>
+    </div>
+    <div class="step" id="stReg" hidden>
+      <div class="two"><input id="rFirst" data-ph="first" maxlength="20"><input id="rLast" data-ph="last" maxlength="20"></div>
+      <input id="rEmail" type="email" data-ph="email" maxlength="60" dir="ltr" autocapitalize="off">
+      <input id="rId" data-ph="uid" maxlength="20" dir="ltr" autocapitalize="off" spellcheck="false">
+      <input id="rPw" type="password" data-ph="pw" maxlength="60" dir="ltr">
+    </div>
+    <p class="error" id="aErr"></p>
+    <button class="btn" id="aGo"></button>
+    <button type="button" class="link" id="aBack" hidden data-i="changePhone"></button>
+    <button type="button" class="link" id="aCancel" hidden data-i="cancel"></button>
+    <small class="muted ver" id="verA"></small>
+  </form>
+</main>
+
+<div id="app" class="layout" hidden>
+  <aside class="side" id="side">
+    <header class="side-head" id="sideHead">
+      <div class="hgrp">
+        <button class="icon sm hx" id="sOpen" data-tt="search"><i data-ico="search" data-s="20"></i></button>
+        <button class="icon sm hx" id="menuBtn"><i data-ico="menu" data-s="20"></i></button>
+      </div>
+      <span class="logo wordmark hx">ZONER</span>
+      <div class="hgrp">
+        <button class="icon sm hx" id="newBtn" data-tt="newGroup"><i data-ico="plus" data-s="20"></i></button>
+        <button class="logo-b hx" id="logoBtn" aria-label="ZONER"><svg viewBox="0 0 40 40" width="24" height="24"><defs><linearGradient id="zlg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3e8ff"/><stop offset=".5" stop-color="#a78bfa"/><stop offset="1" stop-color="#e879f9"/></linearGradient></defs><path d="M8 8H32V14L18 26H32V32H8V26L22 14H8Z" fill="url(#zlg)" stroke="url(#zlg)" stroke-width="2" stroke-linejoin="round"/></svg></button>
+      </div>
+      <div class="sbox" id="sbox">
+        <i class="sbi" data-ico="search" data-s="20"></i>
+        <input id="search" class="search" data-ph="search" autocomplete="off">
+        <button class="icon sm" id="sShut"><i data-ico="close" data-s="18"></i></button>
+      </div>
+    </header>
+    <div class="collap"><div class="collin">
+      <div class="stwrap">
+        <div class="stories" id="stories"></div>
+        <button class="stnav l" id="stL"><i data-ico="back" data-s="16"></i></button>
+        <button class="stnav r" id="stR"><i data-ico="back" data-s="16"></i></button>
+      </div>
+      <div class="tabwrap">
+        <nav class="tabs" id="tabs">
+          <button data-tab="all" class="on" data-i="all"></button>
+          <button data-tab="personal" data-i="personal"></button>
+          <button data-tab="group" data-i="groups"></button>
+          <button data-tab="channel" data-i="channels"></button>
+          <button data-tab="bot" data-i="bots"></button>
+          <button data-tab="contacts" data-i="contacts"></button>
+        </nav>
+      </div>
+    </div></div>
+    <div id="list" class="list"></div>
+  </aside>
+
+  <section class="chat">
+    <div class="chatbg" id="chatbg"><i></i></div>
+    <div class="empty" id="empty"><span>ZONER</span><p data-i="pick"></p></div>
+    <div class="chat-in" id="chatIn" hidden>
+      <header class="chat-head">
+        <button class="icon back" id="back"><i data-ico="back"></i></button>
+        <div class="who" id="who"><span class="avatar" id="pAv"></span><div><b id="pName"></b><small id="pSub"></small></div></div>
+        <button class="icon" id="callBtn" hidden><i data-ico="phone"></i></button>
+        <button class="icon" id="sBtn"><i data-ico="search"></i></button>
+        <button class="icon" id="infoBtn"><i data-ico="info"></i></button>
+      </header>
+      <div class="sbar" id="sbar" hidden><input id="msgSearch" data-ph="searchChat" autocomplete="off"><small id="sCount"></small><button class="icon" id="sClose"><i data-ico="close" data-s="18"></i></button></div>
+      <div class="pinbar" id="pinbar" hidden><i data-ico="pin" data-s="18"></i><div><b data-i="pinned"></b><span id="pinText"></span></div><button class="icon" id="unpin"><i data-ico="close" data-s="16"></i></button></div>
+      <div class="msgs" id="msgs"></div>
+      <button class="down" id="down" aria-label="down"><i data-ico="down" data-s="26"></i></button>
+      <div class="replybar" id="replyBar" hidden><i data-ico="reply" data-s="20" id="rIco"></i><div><b id="rName"></b><span id="rText"></span></div><button class="icon" id="rCancel"><i data-ico="close" data-s="16"></i></button></div>
+      <div class="botbar" id="botbar" hidden></div>
+      <footer class="composer" id="composer">
+        <div class="picker card" id="picker" hidden>
+          <div class="ptabs" id="ptabs"></div>
+          <div class="psub" id="psub" hidden></div>
+          <div class="pgrid" id="pgrid"></div>
+        </div>
+        <div class="pend" id="pend" hidden></div>
+        <div class="cbar" id="cbar">
+          <button class="icon" id="pickBtn"><i data-ico="smile"></i></button>
+          <button class="icon" id="clipBtn"><i data-ico="clip"></i></button>
+          <button class="icon" id="schBtn" hidden><i data-ico="clock" data-s="22"></i><span class="badge" id="schN"></span></button>
+          <input id="file" type="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+          <input id="gifFile" type="file" accept="image/gif" hidden>
+          <input id="docFile" type="file" hidden>
+          <textarea id="text" rows="1" data-ph="msg" autocomplete="off" dir="auto"></textarea>
+          <button class="send mic" id="mic" data-tt="micHint"><i data-ico="video" data-s="22"></i></button>
+          <button class="send" id="send" data-tt="schHold" hidden><i data-ico="send"></i></button>
+        </div>
+        <div class="recbar" id="recbar" hidden>
+          <button class="icon" id="recDel"><i data-ico="trash"></i></button>
+          <div class="rec-mid" id="recMid"></div>
+          <button class="send" id="recGo"></button>
+        </div>
+      </footer>
+      <div class="readonly" id="readonly" hidden><button class="link" id="muteBtn"></button></div>
+    </div>
+  </section>
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer"></aside>
+<div class="ctx card" id="ctx" hidden></div>
+<div class="modal" id="modal" hidden><div class="card" id="card"></div></div>
+<div class="toast" id="toast" hidden></div>
+<div class="crop" id="crop" hidden></div>
+<div class="call" id="call" hidden></div>
+<div class="pers" id="pers" hidden></div>
+<div class="pers" id="sett" hidden></div>
+<div class="sheetbg" id="sheet" hidden></div>
+<div class="vrec" id="vrec" hidden></div>
+<div class="fmtbar" id="fmtbar" hidden></div>
+<div class="pvw" id="pvw" hidden><div class="pvw-c"><img alt="" draggable="false"></div></div>
+<div class="story" id="story" hidden></div>
+<input id="restoreFile" type="file" accept=".json,application/json" hidden>
+<script src="app.js"></script>
+</body>
+</html>
